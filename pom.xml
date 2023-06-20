@@ -11,7 +11,7 @@
 	<groupId>com.rhars</groupId>
 	<artifactId>bookApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>BookCentral</name>
+	<name>bookApp</name>
 	<description> BookCentral -  Reading Assistent</description>
 	<properties>
 		<java.version>17</java.version>

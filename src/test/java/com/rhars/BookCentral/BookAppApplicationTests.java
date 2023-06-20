@@ -1,4 +1,4 @@
-package com.rhars.bookApp;
+package com.rhars.BookCentral;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
