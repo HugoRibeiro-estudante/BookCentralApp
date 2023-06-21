@@ -4,6 +4,7 @@ package com.rhars.BookCentral.models;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,14 +12,11 @@ import java.util.List;
 public class Book implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title", nullable = false, length = 100)
     private String title;
-
-    @Column(name = "editor_users", nullable = false)
-    private List<User> editorUsers;
 
     @Column(name = "autor", nullable = false)
     private String autor;
@@ -29,11 +27,17 @@ public class Book implements Serializable {
     @Column(name = "category", nullable = false, length = 100)
     private String category;
 
+    @OneToMany
+    @JoinColumn(name = "annotation_id")
+    List<Annotation> annotations = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "books", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<User> users = new ArrayList<>();
+
     public Book() {}
 
-    public Book(String title, List<User> editorUsers, String autor, int numberPages, String category) {
+    public Book(String title, String autor, int numberPages, String category) {
         this.title = title;
-        this.editorUsers = editorUsers;
         this.autor = autor;
         this.numberPages = numberPages;
         this.category = category;
@@ -55,13 +59,6 @@ public class Book implements Serializable {
         this.title = title;
     }
 
-    public List<User> getEditorUsers() {
-        return editorUsers;
-    }
-
-    public void setEditorUsers(List<User> editorUsers) {
-        this.editorUsers = editorUsers;
-    }
 
     public String getAutor() {
         return autor;
@@ -97,19 +94,21 @@ public class Book implements Serializable {
         if (numberPages != book.numberPages) return false;
         if (id != null ? !id.equals(book.id) : book.id != null) return false;
         if (title != null ? !title.equals(book.title) : book.title != null) return false;
-        if (editorUsers != null ? !editorUsers.equals(book.editorUsers) : book.editorUsers != null) return false;
         if (autor != null ? !autor.equals(book.autor) : book.autor != null) return false;
-        return category != null ? category.equals(book.category) : book.category == null;
+        if (category != null ? !category.equals(book.category) : book.category != null) return false;
+        if (annotations != null ? !annotations.equals(book.annotations) : book.annotations != null) return false;
+        return users != null ? users.equals(book.users) : book.users == null;
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (editorUsers != null ? editorUsers.hashCode() : 0);
         result = 31 * result + (autor != null ? autor.hashCode() : 0);
         result = 31 * result + numberPages;
         result = 31 * result + (category != null ? category.hashCode() : 0);
+        result = 31 * result + (annotations != null ? annotations.hashCode() : 0);
+        result = 31 * result + (users != null ? users.hashCode() : 0);
         return result;
     }
 
@@ -118,10 +117,11 @@ public class Book implements Serializable {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", editorUsers=" + editorUsers +
                 ", autor='" + autor + '\'' +
                 ", numberPages=" + numberPages +
                 ", category='" + category + '\'' +
+                ", annotations=" + annotations +
+                ", users=" + users +
                 '}';
     }
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 public class Annotation implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "id_book", nullable = false)
@@ -28,6 +28,9 @@ public class Annotation implements Serializable {
 
     @Column(name = "date_create", nullable = false)
     private Date dateCreate;
+
+    @ManyToOne
+    private Book book;
 
 
     public Annotation() {}

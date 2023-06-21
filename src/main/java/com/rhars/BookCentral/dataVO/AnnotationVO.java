@@ -6,8 +6,9 @@ import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
-public class AnnotationVO extends RepresentationModel<AnnotationVO> implements Serializable {
+public class AnnotationVO implements Serializable {
 
     private Long id;
 
@@ -85,14 +86,10 @@ public class AnnotationVO extends RepresentationModel<AnnotationVO> implements S
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AnnotationVO that = (AnnotationVO) o;
+        AnnotationVO annotationVO = (AnnotationVO) o;
 
-        if (page != that.page) return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (idBook != null ? !idBook.equals(that.idBook) : that.idBook != null) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (body != null ? !body.equals(that.body) : that.body != null) return false;
-        return dateCreate != null ? dateCreate.equals(that.dateCreate) : that.dateCreate == null;
+        return Objects.equals(id, annotationVO.id) && Objects.equals(idBook, annotationVO.idBook) && Objects.equals(title, annotationVO.title) && Objects.equals(page, annotationVO.page) && Objects.equals(body, annotationVO.body) && Objects.equals(dateCreate, annotationVO.dateCreate);
+
     }
 
     @Override
