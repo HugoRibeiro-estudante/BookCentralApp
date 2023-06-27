@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "c0d22ca2-5721-42ee-b22c-10fbee5598fe",
+		"name": "BookCentral",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26235163"
+	},
+	"item": [
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "book",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "book/id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/book"
+					},
+					"response": []
+				},
+				{
+					"name": "book",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/book"
+					},
+					"response": []
+				},
+				{
+					"name": "book/id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/book"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Annotation",
+			"item": [
+				{
+					"name": "annotation",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "annotation/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/annotation/1"
+					},
+					"response": []
+				},
+				{
+					"name": "annotation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/annotation"
+					},
+					"response": []
+				},
+				{
+					"name": "annotation",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/annotation"
+					},
+					"response": []
+				},
+				{
+					"name": "annotation/id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/api/v1/annotation/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/v1/user"
+					},
+					"response": []
+				},
+				{
+					"name": "user/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/v1/user/1"
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "localhost:8080/api/v1/user"
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "localhost:8080/api/v1/user/"
+					},
+					"response": []
+				},
+				{
+					"name": "user/id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost:8080/api/v1/user/1"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
