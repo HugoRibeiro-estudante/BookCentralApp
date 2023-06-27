@@ -13,11 +13,11 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Documentação da API sobre o Sistema Subscription")
+                        .title("Documentação da API sobre o Sistema CentralBook")
                         .version("Version 1 (v1)")
                         .description("Esta documentação apresenta os endpoints " +
                                 "responsáveis pelas funcionalidades de Usuários, " +
-                                "Emails e Grupos de Usuários.")
+                                "Livros e Anotações.")
                         .termsOfService("http://mytersm.com")
                         .license(new License()
                                 .name("Apache 2.0")
