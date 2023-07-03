@@ -47,4 +47,9 @@ public class BookService {
         return "ID " + id + " not found!";
     }
 
+    public List<BookVO> buscarPorNome(String nome){
+        List<Book> books = repository.buscarPorNome(nome);
+        return DozerMapper.parseListObject(books, BookVO.class);
+    }
+
 }

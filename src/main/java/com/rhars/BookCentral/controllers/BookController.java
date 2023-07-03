@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -132,5 +133,21 @@ public class BookController {
         return service.delete(id);
     }
 
+    // GET BOOK FOR NAME - HTTP GET
+    // Endpoint: http://localhost:8080/api/v1/book/{nome}
+    @GetMapping("title/{nome}")
+    @Operation(
+            summary = "Get a book by title.", description = "Get a book by title.", tags = {"Book"},
+            responses = {
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
+    public List<BookVO> buscarPorNome(@PathVariable("nome") String nome) {
+        return service.buscarPorNome(nome);
+    }
 
 }
