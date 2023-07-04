@@ -1,6 +1,7 @@
 package com.rhars.BookCentral.controllers;
 
 
+import com.rhars.BookCentral.dataVO.BookVO;
 import com.rhars.BookCentral.dataVO.UserVO;
 import com.rhars.BookCentral.services.UserService;
 import com.rhars.BookCentral.utils.MediaType;
@@ -133,5 +134,24 @@ public class UserController {
     public String delete(@PathVariable("id") Long id) {
         return service.delete(id);
     }
+
+
+    // GET USER FOR USERNAME - HTTP GET
+    // Endpoint: http://localhost:8080/api/v1/user/userName/{userName}
+    @GetMapping("userName/{userName}")
+    @Operation(
+            summary = "Get a user by user name.", description = "Get a book by user name.", tags = {"User"},
+            responses = {
+                    @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
+                    @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
+                    @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
+                    @ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
+                    @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
+            }
+    )
+    public List<UserVO> buscarPorUserName(@PathVariable("userName") String userName) {
+        return service.buscarPorUserName(userName);
+    }
+
 
 }

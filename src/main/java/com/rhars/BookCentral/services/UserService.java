@@ -1,10 +1,12 @@
 package com.rhars.BookCentral.services;
 
 import com.rhars.BookCentral.controllers.UserController;
+import com.rhars.BookCentral.dataVO.BookVO;
 import com.rhars.BookCentral.dataVO.UserVO;
 import com.rhars.BookCentral.exceptions.RequiredObjectIsNullException;
 import com.rhars.BookCentral.exceptions.ResourceNotFoundException;
 import com.rhars.BookCentral.mapper.DozerMapper;
+import com.rhars.BookCentral.models.Book;
 import com.rhars.BookCentral.models.User;
 import com.rhars.BookCentral.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,5 +74,9 @@ public class UserService {
         return "User with id " + id + " has been deleted!";
     }
 
+    public List<UserVO> buscarPorUserName(String userName){
+        List<User> users = repository.buscarPorUserName(userName);
+        return DozerMapper.parseListObject(users, UserVO.class);
+    }
 
 }
