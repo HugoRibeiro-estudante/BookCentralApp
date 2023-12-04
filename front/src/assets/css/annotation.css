@@ -1,0 +1,27 @@
+form{
+    display: block;
+    border: 1px solid black;
+    padding: 30px;
+    width: 50%;
+    margin: auto;
+}
+
+h1{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+input, textarea{
+    width: 100%;
+    display: inline-flex;
+    margin: 10px auto;
+
+}
+
+button{
+    padding: 5px;
+    margin: auto;
+    display: flex;  
+    font-size: 19px;
+}

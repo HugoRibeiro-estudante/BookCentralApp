@@ -26,6 +26,7 @@ public class AnnotationController {
 
     // READ - HTTP GET
     // Endpoint: http://localhost:8080/api/v1/annotation
+    @CrossOrigin
     @GetMapping
     @Operation(
             summary = "Find all annotations.", description = "Find all annotations.", tags = {"Annotation"},

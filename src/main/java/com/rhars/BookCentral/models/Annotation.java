@@ -14,8 +14,9 @@ public class Annotation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_book", nullable = false)
-    private Book idBook;
+    @ManyToOne
+    @JoinColumn(name = "id_book", nullable = false)
+    private Book book;
 
     @Column(name = "title", nullable = false, length = 80)
     private String title;
@@ -29,14 +30,11 @@ public class Annotation implements Serializable {
     @Column(name = "date_create", nullable = false)
     private Date dateCreate;
 
-    @ManyToOne
-    private Book book;
-
 
     public Annotation() {}
 
-    public Annotation(Book idBook, String title, int page, String body, Date dateCreate) {
-        this.idBook = idBook;
+    public Annotation(Book book, String title, int page, String body, Date dateCreate) {
+        this.book = book;
         this.title = title;
         this.page = page;
         this.body = body;
@@ -51,12 +49,12 @@ public class Annotation implements Serializable {
         this.id = id;
     }
 
-    public Book getIdBook() {
-        return idBook;
+    public Book getBook() {
+        return book;
     }
 
-    public void setIdBook(Book idBook) {
-        this.idBook = idBook;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public String getTitle() {
@@ -100,7 +98,7 @@ public class Annotation implements Serializable {
 
         if (page != that.page) return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (idBook != null ? !idBook.equals(that.idBook) : that.idBook != null) return false;
+        if (book != null ? !book.equals(that.book) : that.book != null) return false;
         if (title != null ? !title.equals(that.title) : that.title != null) return false;
         if (body != null ? !body.equals(that.body) : that.body != null) return false;
         return dateCreate != null ? dateCreate.equals(that.dateCreate) : that.dateCreate == null;
@@ -109,7 +107,7 @@ public class Annotation implements Serializable {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (idBook != null ? idBook.hashCode() : 0);
+        result = 31 * result + (book != null ? book.hashCode() : 0);
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + page;
         result = 31 * result + (body != null ? body.hashCode() : 0);
@@ -121,7 +119,7 @@ public class Annotation implements Serializable {
     public String toString() {
         return "Annotation{" +
                 "id=" + id +
-                ", idBook=" + idBook +
+                ", idBook=" + book +
                 ", title='" + title + '\'' +
                 ", page=" + page +
                 ", body='" + body + '\'' +

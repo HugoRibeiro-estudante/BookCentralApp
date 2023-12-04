@@ -1,0 +1,46 @@
+/* Style of Login and Register pages */
+*{
+    margin: 0px;
+    box-sizing: border-box;
+    color: green;
+}
+
+.container{
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+form{
+    display: block;
+    justify-content: center;
+    border: 1px solid white;
+    padding: 20px;
+}
+
+input{
+    display: inline-block;  
+    width: 100%;
+    margin: 10px 0px;
+}
+
+input[type="button"]{
+    background-color: white;
+    width: 60%;
+    display: flex;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+}
+
+.google{
+    padding: 10px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
