@@ -1,50 +1,49 @@
 import React, { useState, useEffect } from 'react';
+import '../../assets/css/book.css'
 
-function App() {
+function NewBook() {
     const [data, setData] = useState(null);
-    const [bookSearch, setBookSearch] = useState('');
+    const [book, setBook] = useState('');
 
-    useEffect(() => {
+    function searchBook(){
         const apiKey = 'AIzaSyAruxhWnaiLkB0Z8nqvyTLLSMtYBkhO7sU';
-        const query = 'flowers for algernon';
+        const query = book;
 
-        fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}`)
+        //preciso restringir a quantidade de resultados
+        fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&langRestrict=pt&key=${apiKey}`)
             .then(response => response.json())
             .then(data => setData(data.items))
             .catch(error => console.error('Error:', error));
-    }, []);
+    }
 
     const handleChange = (event) => {
-        setValor(event.target.value);
+        setBook(event.target.value);
     };
 
     const displayData = () => {
         if (data) {
             return data.map((item, index) => (
-                <div key={index}>
-                    <h2>{item.volumeInfo.title}</h2>
-                    <p>{item.volumeInfo.title}</p>
+                <div key={index} className='book'>
                     <img src={item.volumeInfo.imageLinks.thumbnail} alt="Descrição da imagem"/>
-
+                    <h2>{item.volumeInfo.title}</h2>
                 </div>
             ));
-        } else {
-            return <div>Loading...</div>;
         }
+
     };
 
     return (
         <div>
             <div>
-                <h2>Escolha o livro:</h2>
-                <input type="text" value={bookSearch} onChange={handleChange}/>
-                <input type="button" value="Pesquisar" />
+                <h1>Escolha o livro:</h1>
+                <input type="text" value={book} onChange={handleChange}/>
+                <input type="button" value="Pesquisar" onClick={searchBook} />
             </div>
-            <div>
+            <div className='bookContainer'>
                 {displayData()}
             </div>
         </div>
     );
-}
 
-export default App;
+}
+export default NewBook;

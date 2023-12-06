@@ -1,0 +1,60 @@
+*{
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+h1{
+    text-align: center;
+    color: cadetblue;
+    padding: 1rem;
+}
+
+input{
+    display: flex;
+    margin: 0.5rem auto;
+}
+
+input[type="text"]{
+    width: 80%;
+}
+
+input[type="button"]{
+    background-color: aquamarine;
+}
+
+@media only screen and (min-width: 601px) {
+
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        background-color: lightblue;
+    }
+
+    .bookContainer{
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        
+    }
+
+    .book{
+        padding: 1rem;
+        border: 1px solid white;
+        margin-top: 1rem;
+        width: 95%;
+        background-color: cadetblue;
+    }
+
+    .book img{
+        display: flex;
+        margin: auto;
+    }
+
+    h2 {
+        font-size: 1rem;
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+    }
+}

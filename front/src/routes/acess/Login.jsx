@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../assets/css/acess.css'
+
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,12 @@ import { createContext } from 'react';
 
 
 const firebaseConfig = {
-//
+  apiKey: "AIzaSyAtt8WyoBXYQHQdYCxyC7jzkbOBRxfz0Kw",
+  authDomain: "lenoute-27829.firebaseapp.com",
+  projectId: "lenoute-27829",
+  storageBucket: "lenoute-27829.appspot.com",
+  messagingSenderId: "707481521131",
+  appId: "1:707481521131:web:4d4d9b1f80963bda9aa7ae"
 };
 
 // Contexto controla o estado da autenticação
