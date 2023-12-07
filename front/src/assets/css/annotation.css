@@ -2,8 +2,8 @@ form{
     display: block;
     border: 1px solid black;
     padding: 30px;
-    width: 50%;
-    margin: auto;
+    width: 60%;
+    margin: 1rem auto;
 }
 
 h1{
@@ -24,4 +24,74 @@ button{
     margin: auto;
     display: flex;  
     font-size: 19px;
+}
+
+.noteContainer{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.note{
+    background-color: rgb(255, 255, 64);
+    width: 30%;
+    padding: 0.2rem;
+    border: 1px solid black;
+    margin-top: 2rem;
+}
+
+.note h3 {
+    text-align: center;
+    padding: 0.8rem;
+}
+
+.note p {
+    text-align: justify;
+    padding: 0.6rem;
+}
+
+.newAnnotation{
+    margin: 1rem 0 0 1rem;
+    padding: 1rem;
+
+}
+
+.page {
+    position: relative;
+    float: right;
+    margin-bottom: -1.9rem;
+    margin-right: -0.27rem;
+    width: 20px;
+    height: 50px;
+    background-color: rgb(72, 68, 136);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 75%, 0 100%);
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    font-family: Arial, sans-serif;
+
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        background-color: lightblue;
+    }
+
+    .note{
+        width: 95%;
+
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    form{
+        width: 90%;
+        background-color: cadetblue;
+    }
+
+    form > input{
+        width: 100%;
+    }
 }

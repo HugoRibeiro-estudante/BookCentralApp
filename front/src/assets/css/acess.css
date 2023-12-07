@@ -2,10 +2,10 @@
 *{
     margin: 0px;
     box-sizing: border-box;
-    color: green;
+
 }
 
-.container{
+.containerLogin{
     background-color: black;
     width: 100%;
     height: 100vh;
@@ -15,26 +15,23 @@
     flex-direction: column;
 }
 
-form{
-    display: block;
-    justify-content: center;
-    border: 1px solid white;
-    padding: 20px;
+.containerLogin > div{
+    width: 60%;
 }
 
 input{
-    display: inline-block;  
     width: 100%;
-    margin: 10px 0px;
 }
 
-input[type="button"]{
-    background-color: white;
-    width: 60%;
+form{
+
+    border: 1px solid white;
+    background-color: cadetblue;
+    width: 100%;
+}
+
+.buttons{
     display: flex;
-    margin: auto;
-    text-align: center;
-    justify-content: center;
 }
 
 .google{
@@ -43,4 +40,32 @@ input[type="button"]{
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.google p{
+    text-align: center;
+    margin-bottom: .7rem;
+}
+
+.google a{
+    margin: auto;
+}
+
+.google img{
+    width: 3rem;
+}
+
+@media only screen and (max-width: 600px) {
+    form{
+        width: 95%;
+    }
+
+    .containerLogin > div{
+        width: 100%;
+    }
+    .buttons{
+        display: block;
+    }
+
+    
 }

@@ -33,11 +33,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/newannotation/*',
-        element: <PrivateRoute><NewAnnotation /></PrivateRoute>,
+        element: <NewAnnotation />,
       },
       {
         path: '/annotationview/*',
-        element: <PrivateRoute><AnnotationView /></PrivateRoute>,
+        element: <AnnotationView />,
       },
     ],
   },

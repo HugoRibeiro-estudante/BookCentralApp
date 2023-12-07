@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Button from '../../components/Button';
 
 
 export default function NewAnnotation() {
@@ -52,7 +53,8 @@ export default function NewAnnotation() {
                 <input type="text" placeholder="página" value={page} onChange={e => setPage(e.target.value)} />
                 <textarea placeholder="body" value={body} onChange={e => setBody(e.target.value)} maxLength={300} cols={10} rows={20} />
                 <input type="text" placeholder="data" value={createDate} onChange={e => setCreateDate(e.target.value)} />
-                <button onClick={createAnnotation}>Criar</button>
+                {/* <button onClick={createAnnotation}>Criar</button> */}
+                <Button onclickFunction={createAnnotation} btnValue={'Criar anotação'} />
             </form>
 
 
