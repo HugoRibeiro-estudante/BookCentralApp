@@ -1,10 +1,12 @@
 package com.rhars.BookCentral.models;
 
 import jakarta.persistence.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "user")
@@ -34,12 +36,14 @@ public class User implements Serializable {
 
     public User() {}
 
-    public User(String name, String userName, String email, int age) {
+    public User(String name, String userName, String email, int age, List<Book> books) {
         this.name = name;
         this.userName = userName;
         this.email = email;
         this.age = age;
+        this.books = books;
     }
+
 
     public Long getId() {
         return id;
@@ -81,28 +85,25 @@ public class User implements Serializable {
         this.age = age;
     }
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         User user = (User) o;
-
-        if (age != user.age) return false;
-        if (id != null ? !id.equals(user.id) : user.id != null) return false;
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
-        return email != null ? email.equals(user.email) : user.email == null;
+        return age == user.age && Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(userName, user.userName) && Objects.equals(email, user.email) && Objects.equals(books, user.books);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (userName != null ? userName.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + age;
-        return result;
+        return Objects.hash(id, name, userName, email, age, books);
     }
 
     @Override
@@ -113,6 +114,7 @@ public class User implements Serializable {
                 ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
+                ", books=" + books +
                 '}';
     }
 }

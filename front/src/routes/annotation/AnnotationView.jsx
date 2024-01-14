@@ -1,66 +1,59 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import '../../assets/css/annotation.css'
+import React, { useState, useEffect } from 'react';
+import '../../assets/css/annotation.css';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export default function AnnotationView(){
+export default function AnnotationView() {
+  const location = useLocation();
+  const bookId = location?.state?.bookId || null;
+  const bookTitle = location?.state?.title || null;
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true); // Adicionado o estado 'loading'
+  const navigate = useNavigate();
 
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        fetch("https://8080-debug-hugoribeiro-bookcentral-7abjfe7y8f1.ws-us106.gitpod.io/api/v1/annotation")
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            setData(data);
-        })
-    },[])
-
-    function render(){
-        return data.map((item, index) =>(
-            <div className='note'>
-                <h3 key={index}>
-                    {item.title}
-                </h3>
-                <p>
-                    {item.body}
-                </p>
-              
-                <span className='page'>
-                    {item.page}
-                </span>
-            </div>
-            
-        ));
-        // return(
-        //     <div className='note'>
-        //         <h3>
-        //             título da anotação
-        //         </h3>
-        //         <p>
-        //             Aqui é a anotação em si ............
-        //         </p>
-        //    </div>
-        // )
+  useEffect(() => {
+    if (!bookId) {
+      // Se o bookId não foi recebido, redirecione para /newbook
+      navigate('/newbook');
+      return;
     }
 
-    return(
-        <>
-            <div className="container">
-                <h1>Anotações do livro : </h1>
-                <p className='newAnnotation'>
-                    <Link to="/newannotation">Adicionar nova anotação</Link>
-                </p>
+    fetch(`http://localhost:8080/api/v1/book/${bookId}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        setData(data.annotations);
+        setLoading(false); // Indica que os dados foram carregados
+      });
+  }, [bookId, navigate]);
 
-                <div className='noteContainer'>
-                    {render()}
-                    {render()}
-                    {render()}
-                    {render()}
-                    {render()}
-                    {render()}
-              
-                </div>
-            </div>
-        </>
-    )
+  function render() {
+    return data.map(item => (
+      <div className='note' key={item.id}>
+        <h3>{item.title}</h3>
+        <p>{item.body}</p>
+        <span className='page'>{item.page}</span>
+      </div>
+    ));
+  }
+
+  function redirect() {
+    navigate('/newannotation', { state: { bookId: bookId, title: bookTitle } });
+  }
+
+  return (
+    <>
+      <div className='container'>
+        <h1>Anotações do livro {bookTitle}: </h1>
+        <p className='newAnnotation'>
+          <a onClick={redirect}>Adicionar nova anotação</a>
+        </p>
+
+        <div className='noteContainer'>
+          {loading ? 'Carregando...' : render()}
+        </div>
+      </div>
+    </>
+  );
 }
+ 

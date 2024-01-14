@@ -1,8 +1,13 @@
 package com.rhars.BookCentral.controllers;
 
 import com.rhars.BookCentral.dataVO.AnnotationVO;
-import com.rhars.BookCentral.models.Annotation;
+import com.rhars.BookCentral.dataVO.BookVO;
+import com.rhars.BookCentral.exceptions.RequiredObjectIsNullException;
+import com.rhars.BookCentral.mapper.DozerMapper;
+import com.rhars.BookCentral.models.Book;
+import com.rhars.BookCentral.repositories.BookRepository;
 import com.rhars.BookCentral.services.AnnotationService;
+import com.rhars.BookCentral.services.BookService;
 import com.rhars.BookCentral.utils.MediaType;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -11,7 +16,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +29,12 @@ public class AnnotationController {
 
     @Autowired
     private AnnotationService service;
+
+    @Autowired
+    BookRepository bookRepository;
+
+    @Autowired
+    BookService bookService;
 
     // READ - HTTP GET
     // Endpoint: http://localhost:8080/api/v1/annotation
@@ -90,6 +102,21 @@ public class AnnotationController {
             }
     )
     public AnnotationVO save(@RequestBody AnnotationVO annotationVO) {
+
+        System.out.println("annotationVO: " + annotationVO);
+
+        // Verificar se o livro existe antes de associá-lo à Annotation
+        // Long bookId = annotationVO.getBook().getId();
+        // BookVO book = bookService.findById(bookId);
+
+        // if (book == null) {
+        //         // Lidar com o caso em que o livro não foi encontrado
+        //         throw new RequiredObjectIsNullException("Livro não encontrado para o ID: " + bookId);
+        // }
+        
+
+        // var bookconvert = DozerMapper.parseObject(book, Book.class);
+        // annotationVO.setBook(bookconvert);
         return service.save(annotationVO);
     }
 

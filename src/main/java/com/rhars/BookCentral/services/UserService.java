@@ -8,6 +8,7 @@ import com.rhars.BookCentral.exceptions.ResourceNotFoundException;
 import com.rhars.BookCentral.mapper.DozerMapper;
 import com.rhars.BookCentral.models.Book;
 import com.rhars.BookCentral.models.User;
+import com.rhars.BookCentral.repositories.BookRepository;
 import com.rhars.BookCentral.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class UserService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     public List<UserVO> findAll() {
         var userDbList = repository.findAll();
@@ -79,4 +83,11 @@ public class UserService {
         return DozerMapper.parseListObject(users, UserVO.class);
     }
 
+    public UserVO addBook(Long id, Long idBook) {
+        User user = repository.findById(id).get();
+        Book book = bookRepository.findById(idBook).get();
+        user.getBooks().add(book);
+        user = repository.save(user);
+        return DozerMapper.parseObject(user, UserVO.class);
+    }
 }

@@ -11,22 +11,17 @@ import java.util.Objects;
 public class AnnotationVO implements Serializable {
 
     private Long id;
-
-    private Book idBook;
-
+    private Book book;
     private String title;
-
     private int page;
-
     private String body;
-
-    private Date dateCreate;
+    private Date dateCreate = new Date();
 
 
     public AnnotationVO() {}
 
-    public AnnotationVO(Book idBook, String title, int page, String body, Date dateCreate) {
-        this.idBook = idBook;
+    public AnnotationVO(Book book, String title, int page, String body, Date dateCreate) {
+        this.book = book;
         this.title = title;
         this.page = page;
         this.body = body;
@@ -41,12 +36,12 @@ public class AnnotationVO implements Serializable {
         this.id = id;
     }
 
-    public Book getIdBook() {
-        return idBook;
+    public Book getBook() {
+        return book;
     }
 
-    public void setIdBook(Book idBook) {
-        this.idBook = idBook;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public String getTitle() {
@@ -85,29 +80,20 @@ public class AnnotationVO implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        AnnotationVO annotationVO = (AnnotationVO) o;
-
-        return Objects.equals(id, annotationVO.id) && Objects.equals(idBook, annotationVO.idBook) && Objects.equals(title, annotationVO.title) && Objects.equals(page, annotationVO.page) && Objects.equals(body, annotationVO.body) && Objects.equals(dateCreate, annotationVO.dateCreate);
-
+        AnnotationVO that = (AnnotationVO) o;
+        return page == that.page && Objects.equals(id, that.id) && Objects.equals(book, that.book) && Objects.equals(title, that.title) && Objects.equals(body, that.body) && Objects.equals(dateCreate, that.dateCreate);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (idBook != null ? idBook.hashCode() : 0);
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + page;
-        result = 31 * result + (body != null ? body.hashCode() : 0);
-        result = 31 * result + (dateCreate != null ? dateCreate.hashCode() : 0);
-        return result;
+        return Objects.hash(id, book, title, page, body, dateCreate);
     }
 
     @Override
     public String toString() {
         return "AnnotationVO{" +
                 "id=" + id +
-                ", idBook=" + idBook +
+                ", book=" + book +
                 ", title='" + title + '\'' +
                 ", page=" + page +
                 ", body='" + body + '\'' +

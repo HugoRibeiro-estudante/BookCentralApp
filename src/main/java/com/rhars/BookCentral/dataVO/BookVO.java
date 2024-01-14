@@ -1,32 +1,49 @@
 package com.rhars.BookCentral.dataVO;
 
-import com.rhars.BookCentral.models.User;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import com.rhars.BookCentral.models.Annotation;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import org.springframework.hateoas.RepresentationModel;
 
-import java.io.Serializable;
-import java.util.List;
+import com.rhars.BookCentral.models.User;
 public class BookVO extends RepresentationModel<BookVO> implements Serializable {
 
     private Long id;
+
+    private String googleId;
 
     private String title;
 
     private List<User> editorUsers;
 
-    private String autor;
+    private List<String> authors;
 
     private int numberPages;
 
-    private String category;
+    private List<String> categories;
+
+    private List<Annotation> annotations = new ArrayList<>();
+
+    private List<User> users = new ArrayList<>();
 
     public BookVO() {}
 
-    public BookVO(String title, List<User> editorUsers, String autor, int numberPages, String category) {
+    public BookVO(String googleId, String title, List<User> editorUsers, List<String> authors, int numberPages, List<String> categories, List<Annotation> annotations, List<User> users) {
+        this.googleId = googleId;
         this.title = title;
         this.editorUsers = editorUsers;
-        this.autor = autor;
+        this.authors = authors;
         this.numberPages = numberPages;
-        this.category = category;
+        this.categories = categories;
+        this.annotations = annotations;
+        this.users = users;
     }
 
     public Long getId() {
@@ -35,6 +52,14 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable 
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getGoogleId() {
+        return googleId;
+    }
+
+    public void setGoogleId(String googleId) {
+        this.googleId = googleId;
     }
 
     public String getTitle() {
@@ -53,12 +78,12 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable 
         this.editorUsers = editorUsers;
     }
 
-    public String getAutor() {
-        return autor;
+    public List<String> getauthors() {
+        return authors;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setAuthors(List<String> authors) {
+        this.authors = authors;
     }
 
     public int getNumberPages() {
@@ -69,12 +94,28 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable 
         this.numberPages = numberPages;
     }
 
-    public String getCategory() {
-        return category;
+    public List<String> getCategories() {
+        return categories;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
+
+    public List<Annotation> getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(List<Annotation> annotations) {
+        this.annotations = annotations;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     @Override
@@ -82,38 +123,27 @@ public class BookVO extends RepresentationModel<BookVO> implements Serializable 
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-
         BookVO bookVO = (BookVO) o;
-
-        if (numberPages != bookVO.numberPages) return false;
-        if (id != null ? !id.equals(bookVO.id) : bookVO.id != null) return false;
-        if (title != null ? !title.equals(bookVO.title) : bookVO.title != null) return false;
-        if (editorUsers != null ? !editorUsers.equals(bookVO.editorUsers) : bookVO.editorUsers != null) return false;
-        if (autor != null ? !autor.equals(bookVO.autor) : bookVO.autor != null) return false;
-        return category != null ? category.equals(bookVO.category) : bookVO.category == null;
+        return numberPages == bookVO.numberPages && Objects.equals(id, bookVO.id) && Objects.equals(googleId, bookVO.googleId) && Objects.equals(title, bookVO.title) && Objects.equals(editorUsers, bookVO.editorUsers) && Objects.equals(authors, bookVO.authors) && Objects.equals(categories, bookVO.categories) && Objects.equals(annotations, bookVO.annotations) && Objects.equals(users, bookVO.users);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (id != null ? id.hashCode() : 0);
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (editorUsers != null ? editorUsers.hashCode() : 0);
-        result = 31 * result + (autor != null ? autor.hashCode() : 0);
-        result = 31 * result + numberPages;
-        result = 31 * result + (category != null ? category.hashCode() : 0);
-        return result;
+        return Objects.hash(super.hashCode(), id, googleId, title, editorUsers, authors, numberPages, categories, annotations, users);
     }
 
     @Override
     public String toString() {
         return "BookVO{" +
                 "id=" + id +
+                ", googleId='" + googleId + '\'' +
                 ", title='" + title + '\'' +
                 ", editorUsers=" + editorUsers +
-                ", autor='" + autor + '\'' +
+                ", authors=" + authors +
                 ", numberPages=" + numberPages +
-                ", category='" + category + '\'' +
+                ", categories=" + categories +
+                ", annotations=" + annotations +
+                ", users=" + users +
                 '}';
     }
 }

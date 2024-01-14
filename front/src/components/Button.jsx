@@ -7,10 +7,13 @@ export default function Button({btnValue, onclickFunction, bgColor}){
             margin: '0.5rem auto',
             fontSize: '0.8rem',
             border: '2px double darkcyan',
+            borderRadius: '20px',
             width: '100px',
             display: 'flex',
             justifyContent: 'center',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            padding: '0.2rem',
+            width: '8rem'
         }
 
     }

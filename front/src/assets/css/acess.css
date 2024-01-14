@@ -6,7 +6,7 @@
 }
 
 .containerLogin{
-    background-color: black;
+    background-color: #FFE2C3;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -15,19 +15,36 @@
     flex-direction: column;
 }
 
-.containerLogin > div{
-    width: 60%;
+.containerLogin h1{
+
+    font-size: 2rem;
+    color: #225A76;
+
 }
 
 input{
-    width: 100%;
+    width: 80%;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0px 2px 2px 0px black;
+    padding: .2rem;
+    text-align: center;
 }
 
-form{
 
-    border: 1px solid white;
+.form{
+
     background-color: cadetblue;
-    width: 100%;
+    width: 500px;
+    margin: 2.5rem;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0px 2px 2px 0px black;
+}
+
+.form label{
+    color: white;
+    font-size: .8rem;
 }
 
 .buttons{
@@ -56,8 +73,8 @@ form{
 }
 
 @media only screen and (max-width: 600px) {
-    form{
-        width: 95%;
+    .form{
+        width: 75%;
     }
 
     .containerLogin > div{

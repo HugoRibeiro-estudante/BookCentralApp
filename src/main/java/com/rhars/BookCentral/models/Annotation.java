@@ -1,10 +1,12 @@
 package com.rhars.BookCentral.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "annotation")
@@ -15,7 +17,7 @@ public class Annotation implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_book", nullable = false)
+    @JsonIgnore
     private Book book;
 
     @Column(name = "title", nullable = false, length = 80)
@@ -27,14 +29,13 @@ public class Annotation implements Serializable {
     @Column(name = "body", nullable = false, length = 10000)
     private String body;
 
-    @Column(name = "date_create", nullable = false)
-    private Date dateCreate;
+    @Column(name = "date_create", nullable = true)
+    private Date dateCreate = new Date();
 
 
     public Annotation() {}
 
-    public Annotation(Book book, String title, int page, String body, Date dateCreate) {
-        this.book = book;
+    public Annotation(String title, int page, String body, Date dateCreate) {
         this.title = title;
         this.page = page;
         this.body = body;
@@ -93,33 +94,20 @@ public class Annotation implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Annotation that = (Annotation) o;
-
-        if (page != that.page) return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (book != null ? !book.equals(that.book) : that.book != null) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (body != null ? !body.equals(that.body) : that.body != null) return false;
-        return dateCreate != null ? dateCreate.equals(that.dateCreate) : that.dateCreate == null;
+        return page == that.page && Objects.equals(id, that.id) && Objects.equals(book, that.book) && Objects.equals(title, that.title) && Objects.equals(body, that.body) && Objects.equals(dateCreate, that.dateCreate);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (book != null ? book.hashCode() : 0);
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + page;
-        result = 31 * result + (body != null ? body.hashCode() : 0);
-        result = 31 * result + (dateCreate != null ? dateCreate.hashCode() : 0);
-        return result;
+        return Objects.hash(id, book, title, page, body, dateCreate);
     }
 
     @Override
     public String toString() {
         return "Annotation{" +
                 "id=" + id +
-                ", idBook=" + book +
+                ", book=" + book +
                 ", title='" + title + '\'' +
                 ", page=" + page +
                 ", body='" + body + '\'' +

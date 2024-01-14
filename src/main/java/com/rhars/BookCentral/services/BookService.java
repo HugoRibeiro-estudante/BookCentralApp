@@ -4,17 +4,25 @@ package com.rhars.BookCentral.services;
 import com.rhars.BookCentral.dataVO.BookVO;
 import com.rhars.BookCentral.mapper.DozerMapper;
 import com.rhars.BookCentral.models.Book;
+import com.rhars.BookCentral.models.User;
 import com.rhars.BookCentral.repositories.BookRepository;
+import com.rhars.BookCentral.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
 
     @Autowired
     private BookRepository repository;
+
+    @Autowired
+    private UserRepository userRepository;
+
     public List<BookVO> findAll(){
         return DozerMapper.parseListObject(repository.findAll(), BookVO.class);
     }
@@ -29,6 +37,7 @@ public class BookService {
             return DozerMapper.parseObject(book, BookVO.class);
 
     }
+
 
     public BookVO update(BookVO bookVO) {
         var dbBook = repository.findById(bookVO.getId());

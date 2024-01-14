@@ -117,6 +117,11 @@ public class UserController {
         return service.update(userVO);
     }
 
+    @PutMapping(value = "/{id}/book/{idBook}")
+    public UserVO addBook(@PathVariable("id") Long id, @PathVariable("idBook") Long idBook) {
+        return service.addBook(id, idBook);
+    }
+
 
     // DELETE - HTTP DELETE
     // Endpoint: http://localhost:8080/api/v1/user/ID
