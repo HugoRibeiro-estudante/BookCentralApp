@@ -22,29 +22,33 @@
 
 }
 
-input{
-    width: 80%;
+.containerLogin img{
+    width: 10rem;
+}
+
+.form input{
+    width: 100%;
     border-radius: 20px;
     border: none;
-    box-shadow: 0px 2px 2px 0px black;
+    box-shadow: 0px 2px 5px 1px #225A76;
     padding: .2rem;
     text-align: center;
 }
 
 
 .form{
-
-    background-color: cadetblue;
+    background-color: #318EAD;
     width: 500px;
-    margin: 2.5rem;
+    margin: 1.8rem 0rem;
     border-radius: 20px;
-    padding: 1.5rem;
+    padding: 3rem;
     box-shadow: 0px 2px 2px 0px black;
 }
 
 .form label{
     color: white;
     font-size: .8rem;
+
 }
 
 .buttons{

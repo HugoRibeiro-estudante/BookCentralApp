@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import net.minidev.json.annotate.JsonIgnore;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,8 +26,11 @@ public class User implements Serializable {
     @Column(name = "email", nullable = false, length = 120)
     private String email;
 
-    @Column(name = "age", nullable = false, length = 120)
-    private int age;
+    @Column(name = "birth_date", nullable = false, length = 120)
+    private LocalDate birthDate;
+
+    @Column(name = "photo", nullable = true, length = 120)
+    private String photo;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_book",
@@ -36,11 +40,12 @@ public class User implements Serializable {
 
     public User() {}
 
-    public User(String name, String userName, String email, int age, List<Book> books) {
+    public User(String name, String userName, String email, LocalDate birthDate, String photo, List<Book> books) {
         this.name = name;
         this.userName = userName;
         this.email = email;
-        this.age = age;
+        this.birthDate = birthDate;
+        this.photo = photo;
         this.books = books;
     }
 
@@ -77,12 +82,20 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public int getAge() {
-        return age;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public List<Book> getBooks() {
@@ -98,12 +111,12 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return age == user.age && Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(userName, user.userName) && Objects.equals(email, user.email) && Objects.equals(books, user.books);
+        return birthDate == user.birthDate && Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(userName, user.userName) && Objects.equals(email, user.email) && Objects.equals(photo, user.photo) && Objects.equals(books, user.books);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, userName, email, age, books);
+        return Objects.hash(id, name, userName, email, birthDate, photo, books);
     }
 
     @Override
@@ -113,7 +126,8 @@ public class User implements Serializable {
                 ", name='" + name + '\'' +
                 ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
-                ", age=" + age +
+                ", birthDate=" + birthDate +
+                ", photo='" + photo + '\'' +
                 ", books=" + books +
                 '}';
     }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -30,12 +31,13 @@ public class Annotation implements Serializable {
     private String body;
 
     @Column(name = "date_create", nullable = true)
-    private Date dateCreate = new Date();
+    private LocalDate dateCreate = LocalDate.now();
 
 
     public Annotation() {}
 
-    public Annotation(String title, int page, String body, Date dateCreate) {
+    public Annotation(Book book, String title, int page, String body, LocalDate dateCreate) {
+        this.book = book;
         this.title = title;
         this.page = page;
         this.body = body;
@@ -82,11 +84,11 @@ public class Annotation implements Serializable {
         this.body = body;
     }
 
-    public Date getDateCreate() {
+    public LocalDate getDateCreate() {
         return dateCreate;
     }
 
-    public void setDateCreate(Date dateCreate) {
+    public void setDateCreate(LocalDate dateCreate) {
         this.dateCreate = dateCreate;
     }
 

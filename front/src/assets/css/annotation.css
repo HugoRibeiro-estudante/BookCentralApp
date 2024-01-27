@@ -1,8 +1,6 @@
 form{
     display: block;
-    border: 1px solid black;
     padding: 30px;
-    width: 60%;
     margin: 1rem auto;
 }
 
@@ -12,10 +10,26 @@ form{
     text-align: center;
 } */
 
-input, textarea{
+.annotationTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 0.2rem;
+}
+
+
+
+
+.newAnnotation input{
     width: 100%;
-    display: inline-flex;
-    margin: 10px auto;
+    padding: 5px;
+    margin: 10px 0px;
+
+}
+
+.newAnnotation input[type="int"]{
+    width: 20%;
 
 }
 

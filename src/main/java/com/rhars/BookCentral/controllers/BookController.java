@@ -1,6 +1,7 @@
 package com.rhars.BookCentral.controllers;
 
 import com.rhars.BookCentral.dataVO.BookVO;
+import com.rhars.BookCentral.dataVO.UserVO;
 import com.rhars.BookCentral.models.Book;
 import com.rhars.BookCentral.services.BookService;
 import com.rhars.BookCentral.utils.MediaType;
@@ -150,4 +151,16 @@ public class BookController {
         return service.buscarPorNome(nome);
     }
 
+    // GET USER FOR USERNAME - HTTP GET
+    // Endpoint: http://localhost:8080/api/v1/book/filterByPublic/{googleId}
+    @GetMapping("/filterByPublic/{googleId}")
+    public ResponseEntity<List<BookVO>> filterByPublic(@PathVariable("googleId") String googleId) {
+        List<BookVO> booksVO = service.filterByPublic(googleId);
+
+        if (booksVO == null) {
+            return null;
+        }
+
+        return ResponseEntity.ok(booksVO);
+    }
 }

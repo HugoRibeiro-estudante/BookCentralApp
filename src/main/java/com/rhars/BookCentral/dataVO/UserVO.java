@@ -4,6 +4,7 @@ import com.rhars.BookCentral.models.Book;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,16 +16,18 @@ public class UserVO extends RepresentationModel<UserVO> implements Serializable 
     private String name;
     private String userName;
     private String email;
-    private int age;
+    private LocalDate birthDate;
+    private String photo;
     List<Book> books = new ArrayList<>();
 
     public UserVO() {}
 
-    public UserVO(String name, String userName, String email, int age, List<Book> books) {
+    public UserVO(String name, String userName, String email, LocalDate birthDate, String photo, List<Book> books) {
         this.name = name;
         this.userName = userName;
         this.email = email;
-        this.age = age;
+        this.birthDate = birthDate;
+        this.photo = photo;
         this.books = books;
     }
 
@@ -60,12 +63,20 @@ public class UserVO extends RepresentationModel<UserVO> implements Serializable 
         this.email = email;
     }
 
-    public int getAge() {
-        return age;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public List<Book> getBooks() {
@@ -82,12 +93,12 @@ public class UserVO extends RepresentationModel<UserVO> implements Serializable 
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         UserVO userVO = (UserVO) o;
-        return age == userVO.age && Objects.equals(id, userVO.id) && Objects.equals(name, userVO.name) && Objects.equals(userName, userVO.userName) && Objects.equals(email, userVO.email) && Objects.equals(books, userVO.books);
+        return birthDate == userVO.birthDate && Objects.equals(id, userVO.id) && Objects.equals(name, userVO.name) && Objects.equals(userName, userVO.userName) && Objects.equals(email, userVO.email) && Objects.equals(photo, userVO.photo) && Objects.equals(books, userVO.books);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, name, userName, email, age, books);
+        return Objects.hash(super.hashCode(), id, name, userName, email, birthDate, photo, books);
     }
 
     @Override
@@ -97,7 +108,8 @@ public class UserVO extends RepresentationModel<UserVO> implements Serializable 
                 ", name='" + name + '\'' +
                 ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
-                ", age=" + age +
+                ", birthDate=" + birthDate +
+                ", photo='" + photo + '\'' +
                 ", books=" + books +
                 '}';
     }

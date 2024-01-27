@@ -5,6 +5,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -15,12 +16,12 @@ public class AnnotationVO implements Serializable {
     private String title;
     private int page;
     private String body;
-    private Date dateCreate = new Date();
+    private LocalDate dateCreate = LocalDate.now();
 
 
     public AnnotationVO() {}
 
-    public AnnotationVO(Book book, String title, int page, String body, Date dateCreate) {
+    public AnnotationVO(Book book, String title, int page, String body, LocalDate dateCreate) {
         this.book = book;
         this.title = title;
         this.page = page;
@@ -68,11 +69,11 @@ public class AnnotationVO implements Serializable {
         this.body = body;
     }
 
-    public Date getDateCreate() {
+    public LocalDate getDateCreate() {
         return dateCreate;
     }
 
-    public void setDateCreate(Date dateCreate) {
+    public void setDateCreate(LocalDate dateCreate) {
         this.dateCreate = dateCreate;
     }
 

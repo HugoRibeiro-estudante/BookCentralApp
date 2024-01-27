@@ -2,6 +2,7 @@ package com.rhars.BookCentral.repositories;
 
 import com.rhars.BookCentral.dataVO.BookVO;
 import com.rhars.BookCentral.models.Book;
+import com.rhars.BookCentral.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,5 +18,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> buscarPorNome(@Param("nome") String nome);
 
     Optional<Book> findById(Book idBook);
+
+    @Query("SELECT b FROM Book b WHERE b.googleId = :googleId")
+    List<Book> filterByPublic(@Param("googleId") String googleId);
 
 }

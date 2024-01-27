@@ -2,6 +2,7 @@ package com.rhars.BookCentral.services;
 
 
 import com.rhars.BookCentral.dataVO.BookVO;
+import com.rhars.BookCentral.dataVO.UserVO;
 import com.rhars.BookCentral.mapper.DozerMapper;
 import com.rhars.BookCentral.models.Book;
 import com.rhars.BookCentral.models.User;
@@ -61,4 +62,11 @@ public class BookService {
         return DozerMapper.parseListObject(books, BookVO.class);
     }
 
+    public List<BookVO> filterByPublic(String googleId) {
+        List<Book> books = repository.filterByPublic(googleId);
+        if (books == null) {
+            return null;
+        }
+        return DozerMapper.parseListObject(books, BookVO.class);
+    }
 }

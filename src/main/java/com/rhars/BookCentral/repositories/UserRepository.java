@@ -12,7 +12,10 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query("SELECT s FROM User s WHERE s.userName LIKE :userName")
-    List<User> buscarPorUserName(@Param("userName") String userName);
+//    @Query("SELECT s FROM User s WHERE s.userName LIKE :userName")
+//    List<User> buscarPorUserName(@Param("userName") String userName);
+
+    @Query("SELECT u FROM User u WHERE u.email = :email")
+    User findByEmail(@Param("email") String email);
 
 }

@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -142,10 +143,10 @@ public class UserController {
 
 
     // GET USER FOR USERNAME - HTTP GET
-    // Endpoint: http://localhost:8080/api/v1/user/userName/{userName}
-    @GetMapping("userName/{userName}")
+    // Endpoint: http://localhost:8080/api/v1/user/email/{email}
+    @GetMapping("/email/{email}")
     @Operation(
-            summary = "Get a user by user name.", description = "Get a book by user name.", tags = {"User"},
+            summary = "Get a user by user email.", description = "Get a book by user email.", tags = {"User"},
             responses = {
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content),
                     @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
@@ -154,9 +155,19 @@ public class UserController {
                     @ApiResponse(description = "Internal Server Error", responseCode = "500", content = @Content)
             }
     )
-    public List<UserVO> buscarPorUserName(@PathVariable("userName") String userName) {
-        return service.buscarPorUserName(userName);
-    }
 
+//    public List<UserVO> buscarPorUserName(@PathVariable("userName") String userName) {
+//        return service.buscarPorUserName(userName);
+//    }
+
+    public ResponseEntity<UserVO> findByEmail(@PathVariable("email") String email) {
+        UserVO userVO = service.findByEmail(email);
+
+        if (userVO == null) {
+            return null;
+        }
+
+        return ResponseEntity.ok(userVO);
+    }
 
 }

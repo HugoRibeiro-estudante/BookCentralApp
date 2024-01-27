@@ -28,6 +28,15 @@
     
         @Column(name = "number_pages", nullable = false)
         private int numberPages;
+
+        @Column(name = "status", nullable = false)
+        private Status status;
+
+        @Column(name = "privacy", nullable = false)
+        private Privacy privacy;
+
+        @Column(name = "photo", nullable = true, length = 120)
+        private String photo;
     
         @Column(name = "categories", nullable = false)
         private List<String> categories;
@@ -41,11 +50,14 @@
 
         public Book() {}
 
-        public Book(String googleId, String title, List<String> authors, int numberPages, List<String> categories, List<Annotation> annotations, List<User> users) {
+        public Book(String googleId, String title, List<String> authors, int numberPages, Status status, Privacy privacy, String photo, List<String> categories, List<Annotation> annotations, List<User> users) {
             this.googleId = googleId;
             this.title = title;
             this.authors = authors;
             this.numberPages = numberPages;
+            this.status = status;
+            this.privacy = privacy;
+            this.photo = photo;
             this.categories = categories;
             this.annotations = annotations;
             this.users = users;
@@ -76,11 +88,11 @@
         }
 
 
-        public List<String> getauthors() {
+        public List<String> getAuthors() {
             return authors;
         }
 
-        public void setauthors(List<String> authors) {
+        public void setAuthors(List<String> authors) {
             this.authors = authors;
         }
 
@@ -92,11 +104,35 @@
             this.numberPages = numberPages;
         }
 
-        public List<String> getcategories() {
+        public Status getStatus() {
+            return status;
+        }
+
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+
+        public Privacy getPrivacy() {
+            return privacy;
+        }
+
+        public void setPrivacy(Privacy privacy) {
+            this.privacy = privacy;
+        }
+
+        public String getPhoto() {
+            return photo;
+        }
+
+        public void setPhoto(String photo) {
+            this.photo = photo;
+        }
+
+        public List<String> getCategories() {
             return categories;
         }
 
-        public void setcategories(List<String> categories) {
+        public void setCategories(List<String> categories) {
             this.categories = categories;
         }
 
@@ -121,12 +157,12 @@
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Book book = (Book) o;
-            return numberPages == book.numberPages && Objects.equals(id, book.id) && Objects.equals(googleId, book.googleId) && Objects.equals(title, book.title) && Objects.equals(authors, book.authors) && Objects.equals(categories, book.categories) && Objects.equals(annotations, book.annotations) && Objects.equals(users, book.users);
+            return numberPages == book.numberPages && Objects.equals(id, book.id) && Objects.equals(googleId, book.googleId) && Objects.equals(title, book.title) && Objects.equals(authors, book.authors) && status == book.status && privacy == book.privacy && Objects.equals(photo, book.photo) && Objects.equals(categories, book.categories) && Objects.equals(annotations, book.annotations) && Objects.equals(users, book.users);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(id, googleId, title, authors, numberPages, categories, annotations, users);
+            return Objects.hash(id, googleId, title, authors, numberPages, status, privacy, photo, categories, annotations, users);
         }
 
         @Override
@@ -137,6 +173,9 @@
                     ", title='" + title + '\'' +
                     ", authors=" + authors +
                     ", numberPages=" + numberPages +
+                    ", status=" + status +
+                    ", privacy=" + privacy +
+                    ", photo='" + photo + '\'' +
                     ", categories=" + categories +
                     ", annotations=" + annotations +
                     ", users=" + users +

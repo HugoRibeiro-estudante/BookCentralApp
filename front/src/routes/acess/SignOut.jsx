@@ -14,9 +14,8 @@ export default function SignOut() {
         }
     };
     return (
-        <div>
-        <h1>Deslogar</h1>
+
         <button onClick={handleSignOut}>Deslogar</button>
-        </div>
+
     );
     }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../../assets/css/book.css';
 import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
+import { NavMenu } from '../../components/common/NavMenu';
+import Logo from '../../assets/img/LenouteLogo.png';
 
 function NewBook() {
     const navigate = useNavigate();
@@ -15,11 +17,9 @@ function NewBook() {
         //preciso restringir a quantidade de resultados
         fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&langRestrict=pt&key=${apiKey}&maxResults=16`)
             .then(response => response.json())
-            //.then(data => console.log(data.items))
+            // .then(data => console.log(data))
             .then(data => setData(data.items))
             .catch(error => console.error('Error:', error));
-
-    
 
     }
 
@@ -36,10 +36,9 @@ function NewBook() {
                 return (
                     <div key={index} className='book'>
                         {thumbnail && <img src={thumbnail} alt="Descrição da imagem" />}
-                        <h2>{item.volumeInfo.title}</h2>
-                        <h3>{authors.join(', ')}</h3>
-                        <h3>{item.volumeInfo.pageCount}</h3>
-                        <Button onclickFunction={() => bookCreate(item.id, item.volumeInfo.title, authors, item.volumeInfo.pageCount, item.volumeInfo.categories)} btnValue={"Adicionar"} />
+                        <h3>{item.volumeInfo.title}</h3>
+                        <p>{authors.join(', ')}</p>
+                        <Button onclickFunction={() => bookCreate(item.id, item.volumeInfo.title, authors, item.volumeInfo.pageCount, item.volumeInfo.imageLinks?.thumbnail, item.volumeInfo.categories)} btnValue={"Adicionar"}  bgColor={'#225A76'}/>
                     </div>
                 );
             });
@@ -47,15 +46,19 @@ function NewBook() {
     };
     
 
-    const bookCreate = (id, title, authors, countPages, categories) => {
+    const bookCreate = (id, title, authors, countPages, photo,categories) => {
         const requestData = {
             googleId: id,
             title: title,
             authors: authors,
             numberPages: countPages,
+            status: "LENDO",
+            privacy: "PRIVADO",
+            photo: photo,
             categories: categories,
         };
-    
+            
+
         fetch("http://localhost:8080/api/v1/book", {
             method: 'POST',
             credentials: 'include',
@@ -69,28 +72,48 @@ function NewBook() {
             return response.json();
         })
         .then(data => {
-            console.log('Dentro do segundo bloco .then');
-            console.log(data);
 
-            navigate('/newannotation', { state: { bookId: data.id, title: data.title } });
+            console.log(data);
+            InsertBookOnUser(data.id);
+            navigate('/bookview', { state: { bookId: data.id, title: data.title, googleId: data.googleId } });
 
         })
         .catch((error) => {
             console.error('Erro:', error);
         });
 
-
           
     };
+
+    function InsertBookOnUser(bookId){
+
+        var userId = JSON.parse(localStorage.getItem("userData"));
+        userId = userId.id;
+
+        alert(userId + " - " + bookId);
+        fetch(`http://localhost:8080/api/v1/user/${userId}/book/${bookId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            
+        })
+            .then(response => response.ok ? response.json() : Promise.reject(`Erro na solicitação: ${response.status}`))
+            .then(data => console.log('Solicitação PUT bem-sucedida:', data))
+            .catch(error => console.error('Erro na solicitação PUT:', error.message));
+
+    }
     
 
     return (
         <div>
+
+            <NavMenu activeChild={1}/>
+
             <div>
+                <img src={Logo} alt="" width={150}/>
                 <h1>Escolha o livro:</h1>
                 <input type="text" value={book} onChange={handleChange} id='searchBook'/>
                 {/* <input type="button" value="Pesquisar" onClick={searchBook} id='searchButton'/> */}
-                <Button onclickFunction={searchBook} btnValue={"Pesquisar"}/>
+                <Button onclickFunction={searchBook} btnValue={"Pesquisar"} bgColor={'#318EAD'}/>
             </div>
             <div className='bookContainer'>
                 {displayData()}

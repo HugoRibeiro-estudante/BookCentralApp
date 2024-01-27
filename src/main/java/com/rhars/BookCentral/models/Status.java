@@ -1,4 +1,7 @@
 package com.rhars.BookCentral.models;
 
-public class Status {
+public enum Status{
+        LENDO,
+        LIDO
 }
+

@@ -1,4 +1,6 @@
 package com.rhars.BookCentral.models;
 
-public class Privacy {
+public enum  Privacy {
+    PUBLICO,
+    PRIVADO
 }

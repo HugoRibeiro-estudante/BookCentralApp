@@ -6,7 +6,7 @@ export default function Button({btnValue, onclickFunction, bgColor}){
             color: 'white',
             margin: '0.5rem auto',
             fontSize: '0.8rem',
-            border: '2px double darkcyan',
+            border: '2px double white',
             borderRadius: '20px',
             width: '100px',
             display: 'flex',

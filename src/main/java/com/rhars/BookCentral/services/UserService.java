@@ -78,10 +78,10 @@ public class UserService {
         return "User with id " + id + " has been deleted!";
     }
 
-    public List<UserVO> buscarPorUserName(String userName){
-        List<User> users = repository.buscarPorUserName(userName);
-        return DozerMapper.parseListObject(users, UserVO.class);
-    }
+//    public List<UserVO> buscarPorUserName(String userName){
+//        List<User> users = repository.buscarPorUserName(userName);
+//        return DozerMapper.parseListObject(users, UserVO.class);
+//    }
 
     public UserVO addBook(Long id, Long idBook) {
         User user = repository.findById(id).get();
@@ -90,4 +90,13 @@ public class UserService {
         user = repository.save(user);
         return DozerMapper.parseObject(user, UserVO.class);
     }
+
+    public UserVO findByEmail(String email) {
+        User user = repository.findByEmail(email);
+        if (user == null) {
+            return null;
+        }
+        return DozerMapper.parseObject(user, UserVO.class);
+    }
+
 }
