@@ -55,7 +55,7 @@ export default function Register(){
 
         } catch (error) {
           console.error('Erro na solicitação:', error.message);
-          // Faça algo com o erro, se necessário
+          
         }
 
       } catch (error) {
