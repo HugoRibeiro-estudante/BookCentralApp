@@ -1,5 +1,5 @@
 export async function Verify(email) {
-    const response = await fetch(`http://localhost:8080/api/v1/user/email/${email}`);
+    const response = await fetch(`https://bookcentralapp-production.up.railway.app/api/v1/user/email/${email}`);
     const data = await response.json();
 
     if (data == null) {

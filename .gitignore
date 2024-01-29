@@ -31,4 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
-front/src/firebase.js
+# front/src/firebase.js

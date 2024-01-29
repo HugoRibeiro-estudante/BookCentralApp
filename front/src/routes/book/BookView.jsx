@@ -29,7 +29,7 @@ export default function BookView() {
     }, [googleId, apiKey]);
 
     function getAnnotations() {
-        fetch(`http://localhost:8080/api/v1/book/filterByPublic/${googleId}`)
+        fetch(`https://bookcentralapp-production.up.railway.app/api/v1/book/filterByPublic/${googleId}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data)

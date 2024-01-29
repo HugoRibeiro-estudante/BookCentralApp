@@ -15,7 +15,7 @@ export const Profile = () => {
 
     useEffect(() => {
 
-    fetch(`http://localhost:8080/api/v1/user/${userId.id}`)
+    fetch(`https://bookcentralapp-production.up.railway.app/api/v1/user/${userId.id}`)
     .then(response => response.json())
     .then(data => {
       console.log(data);

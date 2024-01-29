@@ -20,7 +20,7 @@ export default function Register(){
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
         try {
-          const response = await fetch('http://localhost:8080/api/v1/user', {
+          const response = await fetch('https://bookcentralapp-production.up.railway.app/api/v1/user', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

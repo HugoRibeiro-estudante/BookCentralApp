@@ -20,7 +20,7 @@ export default function AnnotationView() {
       return;
     }
 
-    fetch(`http://localhost:8080/api/v1/book/${bookId}`)
+    fetch(`https://bookcentralapp-production.up.railway.app/api/v1/book/${bookId}`)
       .then(response => response.json())
       .then(data => {
         setData(data.annotations);

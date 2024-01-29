@@ -59,7 +59,7 @@ function NewBook() {
         };
             
 
-        fetch("http://localhost:8080/api/v1/book", {
+        fetch("https://bookcentralapp-production.up.railway.app/api/v1/book", {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -91,7 +91,7 @@ function NewBook() {
         userId = userId.id;
 
         alert(userId + " - " + bookId);
-        fetch(`http://localhost:8080/api/v1/user/${userId}/book/${bookId}`, {
+        fetch(`https://bookcentralapp-production.up.railway.app/api/v1/user/${userId}/book/${bookId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             

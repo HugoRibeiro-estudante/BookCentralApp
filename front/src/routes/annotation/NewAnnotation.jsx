@@ -23,7 +23,7 @@ export default function NewAnnotation() {
   function createAnnotation() {
     const bookObject = { id: parseInt(bookId, 10) };
     alert(`id:${bookObject.id} tit:${title} pag:${page} corpo:${body}`);
-    fetch('http://localhost:8080/api/v1/annotation', {
+    fetch('https://bookcentralapp-production.up.railway.app/api/v1/annotation', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
