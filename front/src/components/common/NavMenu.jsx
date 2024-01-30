@@ -49,7 +49,7 @@ export const NavMenu = ({ activeChild }) => {
                 <Link to="/newbook"><img src={Book} alt="" style={activeChild === 1 ? navMenuStyle.active : navMenuStyle.img} /></Link>
                 <a href="#"><img src={Rank} alt="" style={activeChild === 2 ? navMenuStyle.active : navMenuStyle.img} /></a>
                 <Link to="/home"><img src={Home} alt="" style={activeChild === 3 ? navMenuStyle.active : navMenuStyle.img} /></Link>
-                <Link to="profile"><img src={User} alt="" style={activeChild === 4 ? navMenuStyle.active : navMenuStyle.img} /></Link>
+                <Link to="/profile"><img src={User} alt="" style={activeChild === 4 ? navMenuStyle.active : navMenuStyle.img} /></Link>
             </div>
         </div>
     );

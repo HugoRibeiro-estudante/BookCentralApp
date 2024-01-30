@@ -50,7 +50,7 @@ export default function BookView() {
                 </div>
             )}
             <div>
-                <Button btnValue={"Anotar"} bgColor={'#225A76'} onClick={() => {navigate('/bookview', { state: { bookId: data.id, title: data.title, googleId: data.googleId } });}}/>
+                <Button btnValue={"Anotar"} bgColor={'#225A76'} onClick={() => {navigate('/newannotation', { state: { bookId: data.id, title: data.title, googleId: data.googleId } });}}/>
                 {/* <Button btnValue={"Ler Anotações publicas"} onClick={getAnnotations} /> */}
                 <button onClick={getAnnotations}>Ler Anotações publicas</button>
             </div>
