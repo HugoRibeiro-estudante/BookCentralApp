@@ -10,7 +10,7 @@ export default function BookView() {
     const googleId = location?.state?.googleId || null;
     const [data, setData] = useState(null);
     const [annotations, setAnnotations] = useState(null);
-    const apiKey = 'AIzaSyAruxhWnaiLkB0Z8nqvyTLLSMtYBkhO7sU';
+    const apiKey = 'AIzaSyAyBhV6L_wwTd9ni-sBiQwriApsjvzVqnQ';
     const navigate = useNavigate(); 
 
     useEffect(() => {
