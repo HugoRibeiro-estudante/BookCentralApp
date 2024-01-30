@@ -11,7 +11,7 @@ function NewBook() {
     const [book, setBook] = useState('');
 
     function searchBook(){
-        const apiKey = 'AIzaSyAruxhWnaiLkB0Z8nqvyTLLSMtYBkhO7sU';
+        const apiKey = 'AIzaSyAyBhV6L_wwTd9ni-sBiQwriApsjvzVqnQ';
         const query = book;
 
         //preciso restringir a quantidade de resultados
