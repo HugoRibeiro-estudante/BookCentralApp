@@ -9,6 +9,7 @@ import BookView from './routes/book/BookView.jsx';
 import NewAnnotation from './routes/annotation/NewAnnotation.jsx';
 import AnnotationView from './routes/annotation/AnnotationView.jsx';
 import PrivateRoute from './routes/acess/PrivateRoute.jsx';
+import Home from './routes/Home.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
