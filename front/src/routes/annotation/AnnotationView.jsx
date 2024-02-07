@@ -4,6 +4,7 @@ import '../../assets/css/annotation.css';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { NavMenu } from '../../components/common/NavMenu';
+import MyModal from '../../components/common/MyModal';
 
 export default function AnnotationView() {
   const location = useLocation();
@@ -12,14 +13,10 @@ export default function AnnotationView() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [modalShow, setModalShow] = useState(false); // Changed from React.useState to useState
+  const [selectedNote, setSelectedNote] = useState(null);
 
   useEffect(() => {
-    alert(bookId + ' ' + bookTitle);
-    if (!bookId) {
-      navigate('/newbook');
-      return;
-    }
-
     fetch(`https://bookcentralapp-production.up.railway.app/api/v1/book/${bookId}`)
       .then(response => response.json())
       .then(data => {
@@ -30,9 +27,12 @@ export default function AnnotationView() {
 
   function render() {
     return data.map(item => (
-      <div className='note' key={item.id}>
+      <div className='note' key={item.id} onClick={() => {
+        setSelectedNote(item);
+        setModalShow(true);
+      }}>
         <h3>{item.title}</h3>
-        {/* Use DOMPurify.sanitize para sanitizar o HTML */}
+        {/* Use DOMPurify.sanitize to sanitize the HTML */}
         <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.body.substring(0, 30) + (item.body.length > 20 ? '...' : '')) }} />
         <span className='page'>{item.page}</span>
       </div>
@@ -56,6 +56,19 @@ export default function AnnotationView() {
           {loading ? 'Carregando...' : render()}
         </div>
       </div>
+
+      {modalShow && (
+        <MyModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          note={selectedNote}
+          fullscreen={true}
+          title={selectedNote?.title}
+          body={selectedNote?.body}
+          page={selectedNote?.page}
+          
+        />
+      )}
     </div>
   );
 }

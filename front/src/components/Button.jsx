@@ -8,7 +8,6 @@ export default function Button({btnValue, onclickFunction, bgColor}){
             fontSize: '0.8rem',
             border: '2px double white',
             borderRadius: '20px',
-            width: '100px',
             display: 'flex',
             justifyContent: 'center',
             cursor: 'pointer',
