@@ -66,6 +66,7 @@ export default function AnnotationView() {
           title={selectedNote?.title}
           body={selectedNote?.body}
           page={selectedNote?.page}
+          id={selectedNote?.id}
           
         />
       )}

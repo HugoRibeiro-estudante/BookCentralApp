@@ -19,7 +19,8 @@ export const NavMenu = ({ activeChild }) => {
             left: '0',
             width: '100%',
             zIndex: '1',
-            backgroundColor: 'rgba(255, 255, 255, 0.8)' // White color with 50% transparency
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            
         },
 
         nav : {

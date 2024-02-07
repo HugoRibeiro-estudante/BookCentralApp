@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Logo from '../../assets/img/LenouteLogo.png';
 import { Link } from 'react-router-dom';
-import Button from '../../components/Button';
+import Button from '../../components/common/Button';
 import { useNavigate } from 'react-router-dom';
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";

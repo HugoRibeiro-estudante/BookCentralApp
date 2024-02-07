@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import '../../assets/css/acess.css'
-import Button from '../../components/Button';
+import Button from '../../components/common/Button';
 import { useNavigate } from 'react-router-dom';
 import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";

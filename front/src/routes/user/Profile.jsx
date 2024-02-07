@@ -3,7 +3,7 @@ import '../../assets/css/user.css'
 import User from '../../assets/img/UserPhoto.png'
 import { NavMenu } from '../../components/common/NavMenu';
 import { Link } from 'react-router-dom';
-import Button from '../../components/Button';
+import Button from '../../components/common/Button';
 import { useNavigate } from 'react-router-dom';
 
 export const Profile = () => {

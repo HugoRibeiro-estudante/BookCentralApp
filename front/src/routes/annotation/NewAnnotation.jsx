@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import Button from '../../components/Button';
+import Button from '../../components/common/Button';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { NavMenu } from '../../components/common/NavMenu';
 import JoditEditor from "jodit-react";

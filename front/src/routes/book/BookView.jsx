@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Button from '../../components/Button';
+import Button from '../../components/common/Button';
 import { NavMenu } from '../../components/common/NavMenu';
 import DOMPurify from 'dompurify';
 import { useNavigate } from 'react-router-dom';

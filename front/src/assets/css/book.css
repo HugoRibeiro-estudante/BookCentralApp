@@ -4,10 +4,6 @@
 
 }
 
-body{
-    padding-bottom: 5rem;
-}
-
 h1{
     text-align: center;
     color: cadetblue;
@@ -51,15 +47,17 @@ input{
 .book{
 
     background-color: #fff;
-    padding: 0.5rem;
+    padding: 0.9rem;
     border-radius: 20px;
     width: 20%;
-    height: 20rem;
+    height: 23rem;
     margin: 0.9rem;
     box-shadow: 1px 1px 10px 0.1px #000;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    transition: all 0.3s;
+    cursor: pointer;
 }
 
 .book:hover{

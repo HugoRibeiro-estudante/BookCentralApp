@@ -53,7 +53,13 @@ button{
     border: 1px solid black;
     margin-top: 3rem;
     margin: 1rem;
+    transition: all 0.9s;
+    cursor: pointer;
 }
+
+.note:hover{
+    transform: scale(1.1);
+}  
 
 .note h3 {
     text-align: center;
