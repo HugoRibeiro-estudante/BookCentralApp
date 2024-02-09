@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Button from '../../components/common/Button';
+import Button from 'react-bootstrap/Button';
 import { NavMenu } from '../../components/common/NavMenu';
 import DOMPurify from 'dompurify';
 import { useNavigate } from 'react-router-dom';
@@ -39,6 +39,54 @@ export default function BookView() {
             .catch(error => console.error('Error:', error));
     }
 
+    function bookCreate() {
+        const requestData = {
+            googleId: data.id,
+            title: data.volumeInfo.title,
+            authors: data.volumeInfo.authors || [],
+            numberPages: data.volumeInfo.pageCount,
+            status: "LENDO",
+            privacy: "PRIVADO",
+            photo: data.volumeInfo.imageLinks?.thumbnail,
+            categories: data.volumeInfo.categories || [],
+        };
+
+        alert(data.id + " - " + data.volumeInfo.title + " - " + data.volumeInfo.authors + " - " + data.volumeInfo.pageCount + " - " + data.volumeInfo.imageLinks?.thumbnail + " - " + data.volumeInfo.categories)
+        console.log (JSON.stringify(requestData));
+        fetch("https://bookcentralapp-production.up.railway.app/api/v1/book", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        })
+            .then(response => response.json())
+            .then(response => {
+                InsertBookOnUser(response.id);
+                navigate('/bookview', { state: { bookId: data.id, title: data.title, googleId: data.googleId } });
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+    }
+
+    function InsertBookOnUser(bookId){
+
+        var userId = JSON.parse(localStorage.getItem("userData"));
+        userId = userId.id;
+
+        alert(userId + " - " + bookId);
+        fetch(`https://bookcentralapp-production.up.railway.app/api/v1/user/${userId}/book/${bookId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            
+        })
+            .then(response => response.ok ? response.json() : Promise.reject(`Erro na solicitação: ${response.status}`))
+            .then(data => console.log('Solicitação PUT bem-sucedida:', data))
+            .catch(error => console.error('Erro na solicitação PUT:', error.message));
+
+    }
+
     return (
         <div className="container">
             <NavMenu activeChild={1}/>
@@ -50,7 +98,7 @@ export default function BookView() {
                 </div>
             )}
             <div>
-                <Button btnValue={"Anotar"} bgColor={'#225A76'} onClick={() => {navigate('/newannotation', { state: { bookId: data.id, title: data.title, googleId: data.googleId } });}}/>
+                <Button variant="dark" onClick={bookCreate}>Adicionar livro</Button>
                 {/* <Button btnValue={"Ler Anotações publicas"} onClick={getAnnotations} /> */}
                 <button onClick={getAnnotations}>Ler Anotações publicas</button>
             </div>

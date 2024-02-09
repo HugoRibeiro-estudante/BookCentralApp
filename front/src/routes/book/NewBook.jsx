@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../assets/css/book.css';
-import Button from '../../components/common/Button';
+import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { NavMenu } from '../../components/common/NavMenu';
 import Logo from '../../assets/img/LenouteLogo.png';
@@ -38,7 +38,7 @@ function NewBook() {
                         {thumbnail && <img src={thumbnail} alt="Descrição da imagem" />}
                         <h3>{item.volumeInfo.title}</h3>
                         <p>{authors.join(', ')}</p>
-                        <Button onclickFunction={() => bookCreate(item.id, item.volumeInfo.title, authors, item.volumeInfo.pageCount, item.volumeInfo.imageLinks?.thumbnail, item.volumeInfo.categories)} btnValue={"Adicionar"}  bgColor={'#225A76'}/>
+                        <Button variant="dark" onClick={() => navigate('/bookview', {state: {googleId: item.id}})}>Ver</Button>
                     </div>
                 );
             });
@@ -74,8 +74,7 @@ function NewBook() {
         .then(data => {
 
             console.log(data);
-            InsertBookOnUser(data.id);
-            navigate('/bookview', { state: { bookId: data.id, title: data.title, googleId: data.googleId } });
+
 
         })
         .catch((error) => {
@@ -85,22 +84,7 @@ function NewBook() {
           
     };
 
-    function InsertBookOnUser(bookId){
 
-        var userId = JSON.parse(localStorage.getItem("userData"));
-        userId = userId.id;
-
-        alert(userId + " - " + bookId);
-        fetch(`https://bookcentralapp-production.up.railway.app/api/v1/user/${userId}/book/${bookId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            
-        })
-            .then(response => response.ok ? response.json() : Promise.reject(`Erro na solicitação: ${response.status}`))
-            .then(data => console.log('Solicitação PUT bem-sucedida:', data))
-            .catch(error => console.error('Erro na solicitação PUT:', error.message));
-
-    }
     
 
     return (
@@ -113,7 +97,7 @@ function NewBook() {
                 <h1>Escolha o livro:</h1>
                 <input type="text" value={book} onChange={handleChange} id='searchBook'/>
                 {/* <input type="button" value="Pesquisar" onClick={searchBook} id='searchButton'/> */}
-                <Button onclickFunction={searchBook} btnValue={"Pesquisar"} bgColor={'#318EAD'}/>
+                <Button variant='dark' onClick={searchBook}>Pesquisar</Button>
             </div>
             <div className='bookContainer'>
                 {displayData()}

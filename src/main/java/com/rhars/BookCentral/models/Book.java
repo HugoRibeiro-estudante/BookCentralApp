@@ -35,7 +35,7 @@
         @Column(name = "privacy", nullable = false)
         private Privacy privacy;
 
-        @Column(name = "photo", nullable = true, length = 120)
+        @Column(name = "photo", nullable = true)
         private String photo;
     
         @Column(name = "categories", nullable = false)
