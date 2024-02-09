@@ -47,7 +47,7 @@ export default function BookView() {
             numberPages: data.volumeInfo.pageCount,
             status: "LENDO",
             privacy: "PRIVADO",
-            photo: data.volumeInfo.imageLinks?.thumbnail,
+            photo: /*data.volumeInfo.imageLinks?.thumbnail*/ null,
             categories: data.volumeInfo.categories || [],
         };
 
