@@ -4,13 +4,14 @@ import Button from 'react-bootstrap/Button';
 import { NavMenu } from '../../components/common/NavMenu';
 import DOMPurify from 'dompurify';
 import { useNavigate } from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner';
 
 export default function BookView() {
     const location = useLocation();
     const googleId = location?.state?.googleId || null;
     const [data, setData] = useState(null);
     const [annotations, setAnnotations] = useState(null);
-    const apiKey = 'AIzaSyAyBhV6L_wwTd9ni-sBiQwriApsjvzVqnQ';
+    const apiKey = 'AIzaSyAyBhV6L_wwTd9ni-sBiQwriApsjvzVqnQ'
     const navigate = useNavigate(); 
 
     useEffect(() => {
@@ -29,7 +30,7 @@ export default function BookView() {
     }, [googleId, apiKey]);
 
     function getAnnotations() {
-        fetch(`https://bookcentralapp-production.up.railway.app/api/v1/book/filterByPublic/${googleId}`)
+        fetch(`http://localhost:8080/api/v1/book/filterByPublic/${googleId}`)
             .then(response => response.json())
             .then(data => {
                 console.log(data)
@@ -47,13 +48,13 @@ export default function BookView() {
             numberPages: data.volumeInfo.pageCount,
             status: "LENDO",
             privacy: "PRIVADO",
-            photo: /*data.volumeInfo.imageLinks?.thumbnail*/ null,
+            photo: truncateString(data.volumeInfo.imageLinks?.thumbnail, 255), // Truncate the photo value if it exceeds 255 characters
             categories: data.volumeInfo.categories || [],
         };
 
         alert(data.id + " - " + data.volumeInfo.title + " - " + data.volumeInfo.authors + " - " + data.volumeInfo.pageCount + " - " + data.volumeInfo.imageLinks?.thumbnail + " - " + data.volumeInfo.categories)
         console.log (JSON.stringify(requestData));
-        fetch("https://bookcentralapp-production.up.railway.app/api/v1/book", {
+        fetch("http://localhost:8080/api/v1/book", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -76,7 +77,7 @@ export default function BookView() {
         userId = userId.id;
 
         alert(userId + " - " + bookId);
-        fetch(`https://bookcentralapp-production.up.railway.app/api/v1/user/${userId}/book/${bookId}`, {
+        fetch(`http://localhost:8080/api/v1/user/${userId}/book/${bookId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             
@@ -85,6 +86,14 @@ export default function BookView() {
             .then(data => console.log('Solicitação PUT bem-sucedida:', data))
             .catch(error => console.error('Erro na solicitação PUT:', error.message));
 
+    }
+
+    // Function to truncate a string if it exceeds the specified length
+    function truncateString(str, maxLength) {
+        if (str && str.length > maxLength) {
+            return str.substring(0, maxLength);
+        }
+        return str;
     }
 
     return (

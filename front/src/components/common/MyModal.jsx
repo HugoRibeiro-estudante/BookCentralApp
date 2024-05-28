@@ -10,7 +10,7 @@ export default function MyModal(props) {
   };
 
   const deleteAnnotation = () => {
-    fetch(`https://bookcentralapp-production.up.railway.app/api/v1/annotation/${props.id}`, {
+    fetch(`http://localhost:8080/api/v1/annotation/${props.id}`, {
       method: 'DELETE',
     })
       .then(response => {

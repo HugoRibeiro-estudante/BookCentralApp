@@ -46,44 +46,6 @@ function NewBook() {
     };
     
 
-    const bookCreate = (id, title, authors, countPages, photo,categories) => {
-        const requestData = {
-            googleId: id,
-            title: title,
-            authors: authors,
-            numberPages: countPages,
-            status: "LENDO",
-            privacy: "PRIVADO",
-            photo: photo,
-            categories: categories,
-        };
-            
-
-        fetch("https://bookcentralapp-production.up.railway.app/api/v1/book", {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',  
-            },
-            body: JSON.stringify(requestData),
-        })
-        .then(response => {
-            console.log('Dentro do bloco .then');
-            return response.json();
-        })
-        .then(data => {
-
-            console.log(data);
-
-
-        })
-        .catch((error) => {
-            console.error('Erro:', error);
-        });
-
-          
-    };
-
 
     
 
@@ -97,7 +59,7 @@ function NewBook() {
                 <h1>Escolha o livro:</h1>
                 <input type="text" value={book} onChange={handleChange} id='searchBook'/>
                 {/* <input type="button" value="Pesquisar" onClick={searchBook} id='searchButton'/> */}
-                <Button variant='dark' onClick={searchBook}>Pesquisar</Button>
+                <Button variant='dark' onClick={searchBook} className='d-flex mt-3 mb-5'>Pesquisar</Button>
             </div>
             <div className='bookContainer'>
                 {displayData()}

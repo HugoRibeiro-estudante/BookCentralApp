@@ -3,8 +3,9 @@ import '../../assets/css/user.css'
 import User from '../../assets/img/UserPhoto.png'
 import { NavMenu } from '../../components/common/NavMenu';
 import { Link } from 'react-router-dom';
-import Button from '../../components/common/Button';
+import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
+import Spinner from 'react-bootstrap/Spinner';
 
 export const Profile = () => {
 
@@ -15,7 +16,7 @@ export const Profile = () => {
 
     useEffect(() => {
 
-    fetch(`https://bookcentralapp-production.up.railway.app/api/v1/user/${userId.id}`)
+    fetch(`http://localhost:8080/api/v1/user/${userId.id}`)
     .then(response => response.json())
     .then(data => {
       console.log(data);
@@ -39,7 +40,7 @@ export const Profile = () => {
             <img src={book.photo} alt="" />
               <h3>{book.title}</h3>
               <p>{book.authors}</p>
-            <button onClick={() => navigate(`/annotationview`, { state: { bookId: book.id, title: book.title }})}>{'Ver anotações'+ book.id}</button>
+            <Button variant="outline-info" onClick={() => navigate(`/annotationview`, { state: { bookId: book.id, title: book.title }})}>{'Ver anotações'+ book.id}</Button>
           </div>
         ))) : null}
       </div>

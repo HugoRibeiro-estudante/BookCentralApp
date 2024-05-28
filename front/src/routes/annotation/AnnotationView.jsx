@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { NavMenu } from '../../components/common/NavMenu';
 import MyModal from '../../components/common/MyModal';
+import Button from 'react-bootstrap/Button';
 
 export default function AnnotationView() {
   const location = useLocation();
@@ -17,7 +18,7 @@ export default function AnnotationView() {
   const [selectedNote, setSelectedNote] = useState(null);
 
   useEffect(() => {
-    fetch(`https://bookcentralapp-production.up.railway.app/api/v1/book/${bookId}`)
+    fetch(`http://localhost:8080/api/v1/book/${bookId}`)
       .then(response => response.json())
       .then(data => {
         setData(data.annotations);
@@ -32,7 +33,6 @@ export default function AnnotationView() {
         setModalShow(true);
       }}>
         <h3>{item.title}</h3>
-        {/* Use DOMPurify.sanitize to sanitize the HTML */}
         <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(item.body.substring(0, 30) + (item.body.length > 20 ? '...' : '')) }} />
         <span className='page'>{item.page}</span>
       </div>
@@ -49,7 +49,7 @@ export default function AnnotationView() {
         <NavMenu activeChild={1}/>
         <h1>Anotações do livro {bookTitle}: </h1>
         <p className='newAnnotation'>
-          <a onClick={redirect}>Adicionar nova anotação</a>
+          <Button variant='dark' onClick={redirect}>Adicionar nova anotação</Button>
         </p>
 
         <div className='noteContainer'>
