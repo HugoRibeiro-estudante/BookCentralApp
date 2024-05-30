@@ -59,7 +59,7 @@ function NewBook() {
                 <h1>Escolha o livro:</h1>
                 <input type="text" value={book} onChange={handleChange} id='searchBook'/>
                 {/* <input type="button" value="Pesquisar" onClick={searchBook} id='searchButton'/> */}
-                <Button variant='dark' onClick={searchBook} className='d-flex mt-3 mb-5'>Pesquisar</Button>
+                <Button variant='dark' onClick={searchBook} className='d-flex mt-3 mb-4'>Pesquisar</Button>
             </div>
             <div className='bookContainer'>
                 {displayData()}
