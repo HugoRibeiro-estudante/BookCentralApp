@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgres://u8lkfbsrrulm0:p73214b7bf0e91b459f7b26c3916de16bce7ada4bec83bfac58f2c44e318bbb8c@c6sfjnr30ch74e.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/daq8238g4e6hee #${DATABASE_URL} #postgresql://localhost:5432/central_book
-    username: hugo #${SPRING_DATASOURCE_USERNAME}
-    password: '04-07-99' #${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:${DATABASE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
